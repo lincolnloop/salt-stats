@@ -19,13 +19,17 @@ import urllib2
 logger = logging.getLogger(__name__)
 
 
-def _flatten_and_collect_floats(dict_obj, base=None):
+def _flatten_and_collect_floats(obj, base=None):
     """
     Recursive function to flatten dictionaries and
     coerce values to floats.
     """
     flattened = {}
-    for key, item in dict_obj.items():
+    # convert list to dictionary
+    if isinstance(obj, list):
+        obj = dict([pair for pair in enumerate(obj)])
+
+    for key, item in obj.items():
         key = base and '.'.join([base, key]) or key
         if isinstance(item, dict):
             flattened.update(_flatten_and_collect_floats(item, base=key))
