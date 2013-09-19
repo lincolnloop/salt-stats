@@ -28,7 +28,7 @@ def stats(sock="127.0.0.1:11211"):
 
     stats = {}
     for line in resp.splitlines():
-    if line.startswith('STAT '):
-        _, name, val = line.split(' ')
-        stats[name] = val
+        if line.startswith('STAT '):
+            _, name, val = line.split(' ')
+            stats[name] = val
     return stats
