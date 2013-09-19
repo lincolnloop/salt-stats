@@ -18,6 +18,7 @@ file_roots:
 Modules
 -------
 
+* [memcached.stats](https://github.com/lincolnloop/salt-stats/blob/master/salt/_modules/memcached.py)
 * [nginx.status](https://github.com/lincolnloop/salt-stats/blob/master/salt/_modules/nginx.py)
 * [redis.info](https://github.com/lincolnloop/salt-stats/blob/master/salt/_modules/redis.py)
 * [uwsgi.stats](https://github.com/lincolnloop/salt-stats/blob/master/salt/_modules/uwsgi.py)
