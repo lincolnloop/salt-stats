@@ -27,7 +27,7 @@ def _flatten_and_collect_floats(obj, base=None):
     flattened = {}
     # convert list to dictionary
     if isinstance(obj, list):
-        obj = dict([pair for pair in enumerate(obj)])
+        obj = dict([(str(pair[0]), pair[1]) for pair in enumerate(obj)])
 
     for key, item in obj.items():
         key = base and '.'.join([base, key]) or key
