@@ -11,6 +11,7 @@ Pillar need something like::
       api_token: abc1234def
 '''
 
+import base64
 import fnmatch
 import logging
 import json
@@ -48,13 +49,12 @@ def _post_to_librato(data, user, token, metric='gauges'):
     req = urllib2.Request(url, json.dumps(payload),
                           {'Content-Type': 'application/json'})
 
-    password_manager = urllib2.HTTPPasswordMgrWithDefaultRealm()
-    password_manager.add_password(None, url, user, token)
-
-    auth_manager = urllib2.HTTPBasicAuthHandler(password_manager)
-    opener = urllib2.build_opener(auth_manager)
-
-    urllib2.install_opener(opener)
+    encoded = base64.standard_b64encode(':'.join([user, token]))
+    req.add_header("Authorization", "Basic {0}".format(encoded))
+    try:
+        handler = urllib2.urlopen(req)
+    except urllib2.HTTPError as exp:
+        logger.error("Librato request failed with code %s", exp.code)
 
     handler = urllib2.urlopen(req)
     handler.close()

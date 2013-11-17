@@ -12,6 +12,7 @@ Pillar needs something like::
       api_key: abc1234def
 '''
 
+import base64
 import fnmatch
 import logging
 import json
@@ -44,19 +45,16 @@ def _flatten_and_collect_floats(obj, base=None):
 
 def _post_to_salmon(data, api_key, url):
     url = '{0}/api/v1/metric/'.format(url)
-    logger.info("Sending %s to Salmon", len(data))
+    logger.info("Sending %s to %s", len(data), url)
     req = urllib2.Request(url, json.dumps(data),
                           {'Content-Type': 'application/json'})
 
-    password_manager = urllib2.HTTPPasswordMgrWithDefaultRealm()
-    password_manager.add_password(None, url, api_key, '')
-
-    auth_manager = urllib2.HTTPBasicAuthHandler(password_manager)
-    opener = urllib2.build_opener(auth_manager)
-
-    urllib2.install_opener(opener)
-
-    handler = urllib2.urlopen(req)
+    encoded = base64.standard_b64encode(api_key)
+    req.add_header("Authorization", "Basic {0}".format(encoded))
+    try:
+        handler = urllib2.urlopen(req)
+    except urllib2.HTTPError as exp:
+        logger.error("Salmon request failed with code %s", exp.code)
     handler.close()
 
 
