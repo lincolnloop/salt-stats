@@ -45,8 +45,10 @@ def _flatten_and_collect_floats(obj, base=None):
 
 def _post_to_salmon(data, api_key, url):
     url = '{0}/api/v1/metric/'.format(url)
-    logger.info("Sending %s to %s", len(data), url)
-    req = urllib2.Request(url, json.dumps(data),
+    logger.info("Sending %s metrics to %s", len(data), url)
+    payload = json.dumps(data)
+    logger.debug("Salmon payload: %s", payload)
+    req = urllib2.Request(url, payload,
                           {'Content-Type': 'application/json'})
 
     encoded = base64.standard_b64encode(api_key)
