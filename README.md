@@ -26,4 +26,5 @@ Modules
 Returners
 ---------
 
-* [librato](https://github.com/lincolnloop/salt-stats/blob/master/salt/_returners/librato.py)
+* [librato_return](https://github.com/lincolnloop/salt-stats/blob/master/salt/_returners/librato_return.py)
+* [salmon_return](https://github.com/lincolnloop/salt-stats/blob/master/salt/_returners/salmon_return.py)

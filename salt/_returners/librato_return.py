@@ -4,7 +4,7 @@ Salt returner that reports stats to Librato. The returner will
 inspect the payload coercing values into floats where possible.
 Text responses will be ignored
 
-Pillar need something like::
+Pillar needs something like::
 
     librato:
       email: me@example.com
