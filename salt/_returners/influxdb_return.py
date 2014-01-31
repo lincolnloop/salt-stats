@@ -33,7 +33,8 @@ def _flatten_values(obj, base=None):
     # convert list to dictionary
     if isinstance(obj, list):
         obj = dict([(str(pair[0]), pair[1]) for pair in enumerate(obj)])
-
+    elif not isinstance(obj, dict):
+        obj = {'value': obj}
     for key, item in obj.items():
         key = base and '.'.join([base, key]) or key
         if isinstance(item, dict):
@@ -66,6 +67,7 @@ def returner(ret):
     req = urllib2.Request(url, payload, headers)
     try:
         handler = urllib2.urlopen(req)
+        logger.debug("InfluxDB responded %s", handler.getcode())
     except urllib2.HTTPError as exp:
         logger.error("InfluxDB request failed with code %s", exp.code)
 
