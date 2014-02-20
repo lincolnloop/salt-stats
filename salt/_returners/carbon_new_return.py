@@ -47,7 +47,8 @@ def _flatten_values(obj, base=None):
 def returner(ret):
     host = __salt__['pillar.get']('carbon_returner:host', 'localhost')
     port = __salt__['pillar.get']('carbon_returner:port', 2003)
-    prefix = __salt__['pillar.get']('carbon_returner:port', '')
+    # don't keep in dictionary so it can easily be set per-pillar
+    prefix = __salt__['pillar.get']('carbon_returner_prefix', '')
 
     log.debug('Carbon pillar configured with host: {0}:{1}'.format(host, port))
 
