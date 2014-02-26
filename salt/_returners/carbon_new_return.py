@@ -67,7 +67,7 @@ def returner(ret):
     log.debug("Carbon metric base: %s", carbon_base)
     metrics = []
     for key, value in data.items():
-        name = '.'.join([carbon_base, key])
+        name = '.'.join([carbon_base, key.replace(' ', '_')])
         metrics.append(" ".join([name, str(value), str(timestamp)]))
     log.info("Sending %s metrics to carbon", len(metrics))
     plaintext = '\n'.join(metrics) + '\n'
