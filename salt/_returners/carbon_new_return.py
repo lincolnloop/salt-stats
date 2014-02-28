@@ -34,7 +34,7 @@ def _flatten_values(obj, base=None):
         obj = {'value': obj}
     for key, item in obj.items():
         key = base and '.'.join([base, key]) or key
-        if isinstance(item, dict):
+        if isinstance(item, dict) or isinstance(item, list):
             flattened.update(_flatten_values(item, base=key))
         else:
             try:
