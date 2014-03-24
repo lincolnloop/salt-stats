@@ -4,6 +4,15 @@ Read ntp timing statistics
 """
 import salt.utils
 
+def __virtual__():
+    """
+    Only load the module if ntpq and ntpdc are available
+    """
+
+    if salt.utils.which('ntpq') and salt.utils.which('ntpdc'):
+        return 'ntp'
+    return False
+
 
 def offset():
     """
