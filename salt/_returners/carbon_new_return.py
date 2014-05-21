@@ -17,8 +17,7 @@ import time
 log = logging.getLogger(__name__)
 
 
-def __virtual__():
-    return 'carbon_new'
+__virtualname__ = 'carbon_new'
 
 
 def _flatten_values(obj, base=None):

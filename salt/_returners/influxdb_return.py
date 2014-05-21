@@ -20,8 +20,7 @@ import urllib2
 
 logger = logging.getLogger(__name__)
 
-def __virtual__():
-    return 'influxdb'
+__virtualname__ = 'influxdb'
 
 
 def _flatten_values(obj, base=None):
