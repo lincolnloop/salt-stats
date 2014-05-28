@@ -7,6 +7,8 @@ http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-no
 :maturity:   new
 :platform:   all
 """
+import contextlib
+import json
 import logging
 import urllib2
 
