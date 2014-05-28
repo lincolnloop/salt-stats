@@ -19,6 +19,9 @@ import urllib2
 
 logger = logging.getLogger(__name__)
 
+def __virtual__():
+    return __virtualname__
+
 
 def _flatten_and_collect_floats(obj, base=None):
     """

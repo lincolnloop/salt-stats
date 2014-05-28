@@ -19,6 +19,9 @@ log = logging.getLogger(__name__)
 
 __virtualname__ = 'carbon_new'
 
+def __virtual__():
+    return __virtualname__
+
 
 def _flatten_values(obj, base=None):
     """

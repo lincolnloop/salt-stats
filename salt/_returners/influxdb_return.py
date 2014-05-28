@@ -22,6 +22,9 @@ logger = logging.getLogger(__name__)
 
 __virtualname__ = 'influxdb'
 
+def __virtual__():
+    return __virtualname__
+
 
 def _flatten_values(obj, base=None):
     """
