@@ -19,6 +19,8 @@ import urllib2
 
 logger = logging.getLogger(__name__)
 
+__virtualname__ = 'librato'
+
 def __virtual__():
     return __virtualname__
 
