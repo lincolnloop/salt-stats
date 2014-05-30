@@ -45,7 +45,7 @@ def _parse(ping_output):
             'jitter': jitter}
 
 
-def ping(host):
+def ping(host, count=4):
     '''
     Performs a ping to a host
 
@@ -55,5 +55,5 @@ def ping(host):
 
         salt '*' parsed_network.ping archlinux.org
     '''
-    cmd = 'ping -c 10 {0}'.format(salt.utils.network.sanitize_host(host))
+    cmd = 'ping -c {0} {1}'.format(count, salt.utils.network.sanitize_host(host))
     return _parse(__salt__['cmd.run'](cmd))
