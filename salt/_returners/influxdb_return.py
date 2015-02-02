@@ -49,10 +49,11 @@ def _flatten_values(obj, base=None):
     return flattened
 
 def returner(ret):
-    user = __salt__['pillar.get']('influxdb_returner:user', '')
-    password = __salt__['pillar.get']('influxdb_returner:password', '')
-    database = __salt__['pillar.get']('influxdb_returner:database', '')
-    host = __salt__['pillar.get']('influxdb_returner:url', '')
+    config = __pillar__.get('influxdb_returner', {})
+    user = config.get('user', '')
+    password = config.get('password', '')
+    database = config.get('database', '')
+    host = config.get('url', '')
 
     data = _flatten_values(ret['return'])
     series = "{host}-{function}".format(host=ret['id'], function=ret['fun'])

@@ -74,11 +74,10 @@ def _matches_pattern(name, pattern_list):
 
 
 def returner(ret):
-    pillar = __salt__['pillar.raw']()
-    email = pillar['librato']['email']
-    api_token = pillar['librato']['api_token']
-    exclude_keys = pillar['librato'].get('exclude_keys', [])
-    counter_keys = pillar['librato'].get('counter_keys', [])
+    email = __pillar__['librato']['email']
+    api_token = __pillar__['librato']['api_token']
+    exclude_keys = __pillar__['librato'].get('exclude_keys', [])
+    counter_keys = __pillar__['librato'].get('counter_keys', [])
 
     metric_base = ret['fun']
     source = ret['id']
